@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http:www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Register</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet"></link>
+
+    <!-- Custom Fonts -->
+    <link href="/css/font-awesome.css" rel="stylesheet" type="text/css"></link>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+<div class="container">
+    <h1>Register</h1>
+    <form action="/register" th:object="${user}" method="POST" enctype="utf8">
+        <div class="form-group">
+            <label>Username</label>
+            <input class="form-control" th:field="*{username}"/>
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input class="form-control" type="email" th:field="*{email}"/>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input class="form-control" type="password" th:field="*{password}"/>
+        </div>
+        <div class="form-group">
+            <label>Confirm password</label>
+            <input class="form-control" type="password" th:field="*{matchingPassword}"/>
+        </div>
+        <br/>
+        <div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+    </form>
+    <hr/>
+    <p> Already have an account? <a th:href="@{/login}">Login</a></p>
+</div>
+
+<!-- jQuery -->
+<script src="../static/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../static/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>
