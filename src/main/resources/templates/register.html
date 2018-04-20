@@ -20,7 +20,6 @@
 </head>
 <body>
 
-<!--TODO: Reformat code for specific implementation-->
 <div class="container">
     <h1>Register</h1>
     <form action="/register" th:object="${employee}" method="POST" enctype="utf8">
@@ -42,9 +41,9 @@
         </div>
         <div class="form-group">
             <label>Male</label>
-            <input class="form-control" type="radio" th:field="*{gender}" value="MALE"/>
+            <input class="form-control" name="gender" type="radio" th:field="*{gender}" value="MALE"/>
             <label>Female</label>
-            <input class="form-control" type="radio" th:field="*{gender}" value="FEMALE"/>
+            <input class="form-control" name="gender" type="radio" th:field="*{gender}" value="FEMALE"/>
         </div>
         <div class="form-group">
             <label>Date of birth</label>
