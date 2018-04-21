@@ -1,18 +1,29 @@
 package com.eimt.lab.service.impl;
 
 import com.eimt.lab.model.*;
+import com.eimt.lab.persistence.DepartmentRepository;
 import com.eimt.lab.persistence.EmployeeRepository;
 import com.eimt.lab.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
 
-    @Autowired
     EmployeeRepository employeeRepository;
+
+    DepartmentRepository departmentRepository;
+
+    @Autowired
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository,
+                               DepartmentRepository departmentRepository) {
+        this.employeeRepository = employeeRepository;
+        this.departmentRepository = departmentRepository;
+    }
 
     public Employee saveEmployee(FormEmployee formEmployee) {
 
@@ -22,7 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService{
         employee.setPassword(formEmployee.getPassword());
         employee.setFirstName(formEmployee.getFirstName());
         employee.setLastName(formEmployee.getLastName());
-        employee.setBirthDate(formEmployee.getBirthDate());
+        employee.setBirthDate(LocalDate.parse(formEmployee.getBirthDate().toString()));
 
         if(formEmployee.getGender().equals("MALE"))
             employee.setGender(Gender.MALE);
@@ -32,9 +43,9 @@ public class EmployeeServiceImpl implements EmployeeService{
         employee.setActivated(false);
         employee.setActivationCode("0000");
 
-        Department department = new Department("Digitalization and Innovation");
+        Optional<Department> department = departmentRepository.findById(0L);
 
-        employee.setDepartment(department);
+        employee.setDepartment(department.isPresent() ? department.get() : null);
         employee.setRole(Role.EMPLOYEE);
         employee.setRegistrationDate(LocalDateTime.now());
 

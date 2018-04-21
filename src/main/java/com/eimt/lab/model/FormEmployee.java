@@ -1,25 +1,43 @@
 package com.eimt.lab.model;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class FormEmployee {
 
+    @NotNull
     private String email;
-    private String password;
-    private String firstName;
-    private String lastName;
-    private String gender;
-    private LocalDate birthDate;
 
-    public FormEmployee(String email, String password, String firstName,
-                        String lastName, String gender, LocalDate birthDate) {
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.birthDate = birthDate;
+    @NotNull
+    @Size(min = 6, max = 20)
+    private String password;
+
+    @NotNull
+    @Size(min = 6, max = 20)
+    private String confirmPassword;
+
+    @NotNull
+    @Max(30)
+    private String firstName;
+
+    @NotNull
+    @Max(30)
+    private String lastName;
+
+    @NotNull
+    private String gender;
+
+    @NotNull
+    private CharSequence birthDate;
+
+    public FormEmployee() {
     }
+
+    public String getConfirmPassword() { return confirmPassword; }
+
+    public void setConfirmPassword(String confirmPassword) { this.confirmPassword = confirmPassword; }
 
     public String getEmail() {
         return email;
@@ -61,11 +79,11 @@ public class FormEmployee {
         this.gender = gender;
     }
 
-    public LocalDate getBirthDate() {
+    public CharSequence getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
+    public void setBirthDate(CharSequence birthDate) {
         this.birthDate = birthDate;
     }
 }
