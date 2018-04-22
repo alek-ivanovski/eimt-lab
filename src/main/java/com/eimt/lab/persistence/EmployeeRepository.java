@@ -12,6 +12,8 @@ public interface EmployeeRepository {
 
     Optional<Employee> findById(Long id);
 
+    Optional<Employee> findByEmail(String email);
+
     long count();
 
 }

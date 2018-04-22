@@ -9,4 +9,5 @@ public interface EmployeeService {
 
     Employee saveEmployee(FormEmployee formEmployee);
 
+    boolean checkDuplicateEmail(String email);
 }

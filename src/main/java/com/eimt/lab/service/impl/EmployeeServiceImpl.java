@@ -1,6 +1,7 @@
 package com.eimt.lab.service.impl;
 
 import com.eimt.lab.model.*;
+import com.eimt.lab.model.exceptions.DuplicateEmailException;
 import com.eimt.lab.persistence.DepartmentRepository;
 import com.eimt.lab.persistence.EmployeeRepository;
 import com.eimt.lab.service.EmployeeService;
@@ -27,6 +28,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     public Employee saveEmployee(FormEmployee formEmployee) {
 
+        if(this.checkDuplicateEmail(formEmployee.getEmail())){
+            throw new DuplicateEmailException();
+        }
+
         Employee employee = new Employee();
 
         employee.setEmail(formEmployee.getEmail());
@@ -50,6 +55,10 @@ public class EmployeeServiceImpl implements EmployeeService{
         employee.setRegistrationDate(LocalDateTime.now());
 
         return employeeRepository.save(employee);
+    }
+
+    public boolean checkDuplicateEmail(String email) {
+        return employeeRepository.findByEmail(email).isPresent();
     }
 
 }
